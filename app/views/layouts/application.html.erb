@@ -5,11 +5,33 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+    <nav class="navbar navbar-fixed-top navbar-expand-sm text-light bg-dark pt-3 pb-3 mb-3">
+      <div class="container">
+        <nav class="nav navbar-nav navbar-left">
+        <span>Bookers</span>
+        </nav>
+        <nav class="nav navbar-nav navbar-right">
+          <ul class="navbar-nav">
+            <li class="nav-item activ">
+              <%= link_to "Home", "/books/top" %>                  
+            </li>
+            <li class="nav-item ml-4"><%= link_to "About", about_books_path %></li>
+            <li class="nav-item ml-4"><%= link_to "sign up", new_user_registration_path %></li>
+            <li class="nav-item ml-4"><%= link_to "login", new_user_session_path %></li>
+          </ul>
+        </nav>
+      </div>
+    </nav>
+    </header>
     <%= yield %>
   </body>
 </html>
