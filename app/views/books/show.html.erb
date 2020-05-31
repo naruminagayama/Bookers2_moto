@@ -1,2 +1,80 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-lg-3">
+
+<h2 class="pl-3">User info</h2>
+  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+  <table>
+    <tr>
+      <th>name</th><td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <th>introduction</th><td><%= @user.introduction %></td>
+    </tr>
+  </table>
+
+  <% if @book.user == current_user %>
+  <button type="button" class="btn btn-outline-secondary mt-3 btn-block">
+  <%= link_to edit_user_path(@user) do %>
+    <%= icon('fas','tools') %> 
+  <% end %>
+  </button>
+  <% else %>
+    <button type="button" class="btn btn-outline-secondary mt-3 btn-block">
+  <%= link_to user_path(current_user) do %>
+    <%= icon('fas','tools') %> 
+  <% end %>
+  </button>
+  <% end %>
+
+<h2 class="pl-3">New book</h2>
+<%= form_for(@book) do |f| %>
+  <% if @book.errors.any? %>
+    <h3><%= pluralize(@book.errors.count, "error") %> :</h3>
+    <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+    <% end %>
+  <% end %>
+  <h6>Title</h6>
+  <%= f.text_field :title %>
+  <h6 class="pt-2">Opinion</h6>
+  <%= f.text_area :body %><br><br>
+  <%= f.submit 'Create Book', class: "btn btn-primary btn-block" %>
+<% end %>
+
+      </div>
+
+      <div class="col-lg-9">
+
+<h2>Book detail</h2>
+<table class="table table-hover">
+<tr>
+  <td>
+    <%= link_to user_path(@user) do %>
+    <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg", size: "40x40" %>
+    <% end %><br>
+    <%= link_to @user.name, user_path(@user) %>
+  </td>
+  <td><%= link_to @book.title, book_path(@book)%></td>
+  <td><%= @book.body %></td>
+  <td class="btn btn-success">
+    <% if @book.user == current_user %>
+      <%= link_to "Edit", edit_book_path(@book) %>
+    <% end %>      
+  </td>
+  <td class="btn btn-danger">
+    <% if @book.user == current_user %>
+      <%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <% end %>      
+  </td>
+</tr>
+
+</table>
+
+   </div>
+
+  </div>
+</div>

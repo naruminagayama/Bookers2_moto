@@ -21,12 +21,49 @@
         </nav>
         <nav class="nav navbar-nav navbar-right">
           <ul class="navbar-nav">
+            <% if user_signed_in? %>
             <li class="nav-item activ">
-              <%= link_to "Home", "/books/top" %>                  
+              <%= link_to user_path(current_user.id) do %>
+                <%= icon('fas','home') %><span class="ml-2">Home</span>
+              <% end %>
             </li>
-            <li class="nav-item ml-4"><%= link_to "About", about_books_path %></li>
-            <li class="nav-item ml-4"><%= link_to "sign up", new_user_registration_path %></li>
-            <li class="nav-item ml-4"><%= link_to "login", new_user_session_path %></li>
+            <li class="nav-item ml-4">
+              <%= link_to users_path do %>
+                <%= icon('fas','user') %><span class="ml-2">Users</span>
+              <% end %>
+            </li>
+            <li class="nav-item ml-4">
+              <%= link_to books_path do %>
+                <%= icon('fas','book') %><span class="ml-2">Books</span>
+              <% end %>
+            </li>
+            <li class="nav-item ml-4">
+              <%= link_to destroy_user_session_path, method: :delete do %>
+                <%= icon('fas','sign-out-alt') %><span class="ml-2">logout</span>
+              <% end %>
+            </li>
+            <% else %>
+            <li class="nav-item activ">
+              <%= link_to "/books/top" do %>
+                <%= icon('fas','home') %><span class="ml-2">Home</span>
+              <% end %>
+            </li>
+            <li class="nav-item ml-4">
+              <%= link_to about_books_path do %>
+                <%= icon('fas','paperclip') %><span class="ml-2">About</span>
+              <% end %>
+            </li>
+            <li class="nav-item ml-4">
+              <%= link_to new_user_registration_path do %>
+                <%= icon('fas','edit') %><span class="ml-2">sign up</span>
+              <% end %>
+            </li>
+            <li class="nav-item ml-4">
+              <%= link_to new_user_session_path do %>
+                <%= icon('fas','sign-in-alt') %><span class="ml-2">login</span>
+              <% end %>
+            </li>
+            <% end %>
           </ul>
         </nav>
       </div>
