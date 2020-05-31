@@ -6,19 +6,19 @@
     <div class="col-lg-3">
 
 <h2 class="pl-3">User info</h2>
-  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+  <%= attachment_image_tag @book.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
   <table>
     <tr>
-      <th>name</th><td><%= @user.name %></td>
+      <th>name</th><td><%= @book.user.name %></td>
     </tr>
     <tr>
-      <th>introduction</th><td><%= @user.introduction %></td>
+      <th>introduction</th><td><%= @book.user.introduction %></td>
     </tr>
   </table>
 
   <% if @book.user == current_user %>
   <button type="button" class="btn btn-outline-secondary mt-3 btn-block">
-  <%= link_to edit_user_path(@user) do %>
+  <%= link_to edit_user_path(@book.user) do %>
     <%= icon('fas','tools') %> 
   <% end %>
   </button>
@@ -53,10 +53,10 @@
 <table class="table table-hover">
 <tr>
   <td>
-    <%= link_to user_path(@user) do %>
+    <%= link_to user_path(@book.user) do %>
     <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg", size: "40x40" %>
     <% end %><br>
-    <%= link_to @user.name, user_path(@user) %>
+    <%= link_to @book.user.name, user_path(@book.user) %>
   </td>
   <td><%= link_to @book.title, book_path(@book)%></td>
   <td><%= @book.body %></td>
