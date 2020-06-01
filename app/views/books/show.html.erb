@@ -30,7 +30,7 @@
   </button>
   <% end %>
 
-<h2 class="pl-3">New book</h2>
+<h2 class="pl-3 pt-4">New book</h2>
 <%= form_for(@book) do |f| %>
   <% if @book.errors.any? %>
     <h3><%= pluralize(@book.errors.count, "error") %> :</h3>
@@ -39,9 +39,9 @@
     <% end %>
   <% end %>
   <h6>Title</h6>
-  <%= f.text_field :title %>
+  <%= f.text_field :title, class: "btn-block" %>
   <h6 class="pt-2">Opinion</h6>
-  <%= f.text_area :body %><br><br>
+  <%= f.text_area :body, class: "btn-block" %><br>
   <%= f.submit 'Create Book', class: "btn btn-primary btn-block" %>
 <% end %>
 
@@ -50,7 +50,7 @@
       <div class="col-lg-9">
 
 <h2>Book detail</h2>
-<table class="table table-hover">
+<table class="table table-sm">
 <tr>
   <td>
     <%= link_to user_path(@book.user) do %>
@@ -60,16 +60,17 @@
   </td>
   <td><%= link_to @book.title, book_path(@book)%></td>
   <td><%= @book.body %></td>
-  <td class="btn btn-success">
-    <% if @book.user == current_user %>
-      <%= link_to "Edit", edit_book_path(@book) %>
-    <% end %>      
-  </td>
-  <td class="btn btn-danger">
-    <% if @book.user == current_user %>
+  <% if @book.user == current_user %>
+    <td class="btn btn-success btn-sm">
+      <%= link_to "Edit", edit_book_path(@book) %>     
+    </td>
+  <% end %> 
+  <td></td>
+  <% if @book.user == current_user %>
+    <td class="btn btn-danger btn-sm">
       <%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-    <% end %>      
-  </td>
+    </td>
+  <% end %> 
 </tr>
 
 </table>
